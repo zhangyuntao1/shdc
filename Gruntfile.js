@@ -1,4 +1,4 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
     grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-contrib-watch');
@@ -15,7 +15,10 @@ module.exports = function(grunt) {
                     debug: true
                 },
                 debug: true,
-                transform: [["babelify", { "presets": ["es2015"] }]],
+                transform: [["babelify", {
+                    "presets": ["es2015", "es2017", "stage-0"],
+                    "plugins": ["transform-runtime"]
+                }]],
             },
             app: {
                 expand: true,
@@ -27,11 +30,11 @@ module.exports = function(grunt) {
         crx: {
             myPublicExtension: {
                 src: "buildSrc/**/*",
-                dest: "crx/clearRead.zip",
+                dest: "crx/shdc.zip",
             },
             mySignedExtension: {
                 src: "buildSrc/**/*",
-                dest: "crx/clearRead.crx",
+                dest: "crx/shdc.crx",
                 options: {
                     privateKey: "buildSrc/key.pem"
                 }
